@@ -1,18 +1,17 @@
 import ceylon.ast.core {
     BaseExpression,
     MemberNameWithTypeArguments,
-    PostfixIncrementOperation
+    PrefixDecrementOperation
 }
 
-// TODO: Might as well create a node that says "lhs = lhs.successor" and evaluate it!
-Anything evaluatePostfixIncrementOperation(Context context, PostfixIncrementOperation operation) {
+Anything evaluatePrefixDecrementOperation(Context context, PrefixDecrementOperation operation) {
     value initial = evaluate(context, operation.operand);
     
     if (!exists initial) {
         return SyntaxError("Operand cannot be null");
     }
     
-    value result = `value Ordinal.successor`.memberGet(initial);
+    value result = `value Ordinal.predecessor`.memberGet(initial);
     
     "TODO"
     assert (is BaseExpression baseExpression = operation.operand);
@@ -21,5 +20,5 @@ Anything evaluatePostfixIncrementOperation(Context context, PostfixIncrementOper
     
     context[memberName.name.name] = result;
     
-    return initial;
+    return result;
 }

@@ -1,11 +1,11 @@
 import ceylon.ast.core {
     BaseExpression,
     MemberNameWithTypeArguments,
-    PostfixIncrementOperation
+    PrefixIncrementOperation
 }
 
 // TODO: Might as well create a node that says "lhs = lhs.successor" and evaluate it!
-Anything evaluatePostfixIncrementOperation(Context context, PostfixIncrementOperation operation) {
+Anything evaluatePrefixIncrementOperation(Context context, PrefixIncrementOperation operation) {
     value initial = evaluate(context, operation.operand);
     
     if (!exists initial) {
@@ -21,5 +21,5 @@ Anything evaluatePostfixIncrementOperation(Context context, PostfixIncrementOper
     
     context[memberName.name.name] = result;
     
-    return initial;
+    return result;
 }
