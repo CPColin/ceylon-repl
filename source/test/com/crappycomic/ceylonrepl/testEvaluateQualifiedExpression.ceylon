@@ -8,6 +8,7 @@ import ceylon.test {
 {[String, Anything]*} testEvaluateQualifiedExpressionParameters = {
     ["\"hello\".size", 5],
     ["\"hello\".size.negated", -5]
+    //["runtime.type", runtime.type], TODO: ClassDeclaration not showing members for objects
 };
 
 test

@@ -3,9 +3,8 @@ import ceylon.ast.core {
 }
 
 // TODO: search current context, explicitly imported top-levels, ceylon.language top-levels
-// will likely need a BoundValueDeclaration that encapsulates the Context the value is in
 
-ContextValueDeclaration? resolveBaseExpression(Context context, BaseExpression expression) {
+BoundDeclaration? resolveBaseExpression(Context context, BaseExpression expression) {
     value name = expression.nameAndArgs.name.name;
     
     "TODO" assert (!expression.nameAndArgs.typeArguments exists);
@@ -16,7 +15,7 @@ ContextValueDeclaration? resolveBaseExpression(Context context, BaseExpression e
         } else if (exists outerContext = context.outerContext) {
             return resolveBaseExpression(outerContext, expression);
         } else {
-            return null;
+            return resolveTopLevel(`package ceylon.language`, name);
         }
     }
     

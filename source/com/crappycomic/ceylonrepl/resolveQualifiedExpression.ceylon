@@ -11,7 +11,7 @@ import ceylon.language.meta.declaration {
     ValueDeclaration
 }
 
-FunctionDeclaration|BoundValueDeclaration|SyntaxError|Null resolveQualifiedExpression(
+BoundDeclaration|SyntaxError|Null resolveQualifiedExpression(
         Context context, QualifiedExpression expression) {
     "TODO: Implement other operators"
     assert (expression.memberOperator is MemberOperator);
@@ -28,12 +28,11 @@ FunctionDeclaration|BoundValueDeclaration|SyntaxError|Null resolveQualifiedExpre
     
     value memberName = expression.nameAndArgs.name.name;
     value clazz = classDeclaration(receiver);
-    
     value member = clazz.getMemberDeclaration<FunctionOrValueDeclaration>(memberName);
     
     return switch (member)
         case (is FunctionDeclaration)
-            member
+            MemberFunctionDeclaration(member, receiver)
         case (is ValueDeclaration)
             MemberValueDeclaration(member, receiver)
         case (null)

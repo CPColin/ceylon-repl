@@ -4,7 +4,11 @@ import ceylon.ast.core {
 }
 
 Anything evaluateBaseExpression(Context context, BaseExpression expression) {
-    if (exists resolved = resolveBaseExpression(context, expression)) {
+    value resolved = resolveBaseExpression(context, expression);
+    
+    if (is BoundFunctionDeclaration resolved) {
+        return resolved;
+    } else if (is BoundValueDeclaration resolved) {
         value val = resolved.get();
         
         if (is Node val) {

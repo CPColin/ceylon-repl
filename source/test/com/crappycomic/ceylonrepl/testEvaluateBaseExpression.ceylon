@@ -12,7 +12,8 @@ import com.crappycomic.ceylonrepl {
 {[{<String->Anything>*}, String, Anything]*} testEvaluateBaseExpressionParameters = {
     [{"a"->1}, "a", 1],
     [{"a"->1}, "b", null],
-    [{"a"->1, "b"->2}, "a + b", 3]
+    [{"a"->1, "b"->2}, "a + b", 3],
+    [empty, "runtime", runtime]
 };
 
 test
