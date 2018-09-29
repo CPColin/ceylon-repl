@@ -23,7 +23,6 @@ shared void testDefineInner() {
     assertFalse(outerContext.defines(key), "Outer context should not have changed after inner put");
 }
 
-test
 shared void testDefineOuter() {
     value outerContext = Context();
     value innerContext = outerContext.inner;
@@ -32,7 +31,7 @@ shared void testDefineOuter() {
     
     outerContext[key] = val;
     
-    assertTrue(innerContext.defines(key), "Inner context should define the key after outer put");
+    assertFalse(innerContext.defines(key), "Inner context should not have changed after outer put");
     assertTrue(outerContext.defines(key), "Outer context should define the key after outer put");
 }
 
@@ -46,7 +45,7 @@ shared void testGetInner() {
     innerContext[key] = val;
     
     assertEquals(innerContext[key], val, "Inner context should return the value after inner put");
-    assertNull(outerContext[key], "Outer context should not have changes after inner put");
+    assertNull(outerContext[key], "Outer context should not have changed after inner put");
 }
 
 test
@@ -58,6 +57,6 @@ shared void testGetOuter() {
     
     outerContext[key] = val;
     
-    assertEquals(innerContext[key], val, "Inner context should return the value after outer put");
+    assertNull(innerContext[key], "Inner context should not have changed after outer put");
     assertEquals(outerContext[key], val, "Outer context should return the value after outer put");
 }

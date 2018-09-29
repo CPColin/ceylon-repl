@@ -6,10 +6,19 @@ import ceylon.language.meta.model {
 }
 
 interface BoundValueDeclaration
-        of MemberValueDeclaration|StaticValueDeclaration|TopLevelValueDeclaration {
+        of ContextValueDeclaration
+            | MemberValueDeclaration
+            | StaticValueDeclaration
+            | TopLevelValueDeclaration {
     shared formal Anything get();
     
     shared formal void set(Anything newValue);
+}
+
+class ContextValueDeclaration(String name, Context context) satisfies BoundValueDeclaration {
+    get() => context.get(name);
+    
+    set(Anything newValue) => context.put(name, newValue);
 }
 
 class MemberValueDeclaration(ValueDeclaration declaration, Object container)
