@@ -36,7 +36,10 @@ class ContextValueDeclaration(String name, Context context) satisfies BoundValue
 
 class MemberFunctionDeclaration(FunctionDeclaration declaration, Object container)
         satisfies BoundFunctionDeclaration {
-    invoke(Anything* arguments) => declaration.memberInvoke(container, empty, *arguments);
+    value typeParameters = Array.ofSize(declaration.typeParameterDeclarations.size, `Anything`);
+    
+    invoke(Anything* arguments)
+            => declaration.memberInvoke(container, typeParameters.sequence(), *arguments);
 }
 
 class MemberValueDeclaration(ValueDeclaration declaration, Object container)
@@ -57,7 +60,9 @@ class StaticValueDeclaration(ValueDeclaration declaration, Type<Object> containe
 
 class TopLevelFunctionDeclaration(FunctionDeclaration declaration)
         satisfies BoundFunctionDeclaration {
-    invoke(Anything* arguments) => declaration.invoke(empty, *arguments);
+    value typeParameters = Array.ofSize(declaration.typeParameterDeclarations.size, `Anything`);
+    
+    invoke(Anything* arguments) => declaration.invoke(typeParameters.sequence(), *arguments);
 }
 
 class TopLevelValueDeclaration(ValueDeclaration declaration)
