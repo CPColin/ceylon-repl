@@ -14,7 +14,7 @@ interface BoundFunctionDeclaration
         of MemberFunctionDeclaration
             | TopLevelFunctionDeclaration
         satisfies BoundDeclaration {
-    shared formal Anything invoke();
+    shared formal Anything invoke(Anything* arguments);
 }
 
 interface BoundValueDeclaration
@@ -36,7 +36,7 @@ class ContextValueDeclaration(String name, Context context) satisfies BoundValue
 
 class MemberFunctionDeclaration(FunctionDeclaration declaration, Object container)
         satisfies BoundFunctionDeclaration {
-    invoke() => nothing;
+    invoke(Anything* arguments) => declaration.memberInvoke(container, empty, *arguments);
 }
 
 class MemberValueDeclaration(ValueDeclaration declaration, Object container)
@@ -57,7 +57,7 @@ class StaticValueDeclaration(ValueDeclaration declaration, Type<Object> containe
 
 class TopLevelFunctionDeclaration(FunctionDeclaration declaration)
         satisfies BoundFunctionDeclaration {
-    invoke() => nothing;
+    invoke(Anything* arguments) => declaration.invoke(empty, *arguments);
 }
 
 class TopLevelValueDeclaration(ValueDeclaration declaration)

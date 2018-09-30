@@ -34,6 +34,8 @@ shared void run() {
             continue;
         }
         
+        print(node);
+        
         value result = evaluate(context, node);
         
         print("\t``result else "<null>"``");
