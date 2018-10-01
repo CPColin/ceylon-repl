@@ -13,6 +13,8 @@ import com.crappycomic.ceylonrepl {
     [{"a"->1}, "a", 1],
     [{"a"->1}, "b", null],
     [{"a"->1, "b"->2}, "a + b", 3],
+    [empty, "true", true],
+    [empty, "false", false],
     [empty, "runtime", runtime]
 };
 

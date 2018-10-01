@@ -6,7 +6,9 @@ import ceylon.ast.core {
 Anything evaluateInvocation(Context context, Invocation invocation) {
     value resolved = evaluate(context, invocation.invoked);
     
-    assert (is BoundFunctionDeclaration resolved);
+    if (resolved is SyntaxError) {
+        return resolved;
+    }
     
     value arguments = invocation.arguments;
     
@@ -17,5 +19,11 @@ Anything evaluateInvocation(Context context, Invocation invocation) {
             evaluate(context, argument)
     };
     
-    return resolved.invoke(*evaluatedArguments);
+    if (is BoundClassOrInterfaceDeclaration resolved) {
+        return resolved.instantiate(*evaluatedArguments);
+    } else if (is BoundFunctionDeclaration resolved) {
+        return resolved.invoke(*evaluatedArguments);
+    } else {
+        return SyntaxError("Unable to invoke declaration: ``resolved else "<null>"``");
+    }
 }

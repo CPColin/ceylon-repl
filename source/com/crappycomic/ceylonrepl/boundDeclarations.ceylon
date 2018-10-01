@@ -1,4 +1,6 @@
 import ceylon.language.meta.declaration {
+    ClassDeclaration,
+    ClassOrInterfaceDeclaration,
     FunctionDeclaration,
     ValueDeclaration
 }
@@ -7,8 +9,15 @@ import ceylon.language.meta.model {
 }
 
 interface BoundDeclaration
-        of BoundFunctionDeclaration
+        of BoundClassOrInterfaceDeclaration
+            | BoundFunctionDeclaration
             | BoundValueDeclaration {}
+
+interface BoundClassOrInterfaceDeclaration
+        of TopLevelClassOrInterfaceDeclaration
+        satisfies BoundDeclaration {
+    shared formal Anything instantiate(Anything* arguments);
+}
 
 interface BoundFunctionDeclaration
         of MemberFunctionDeclaration
@@ -56,6 +65,14 @@ class StaticValueDeclaration(ValueDeclaration declaration, Type<Object> containe
     shared actual void set(Anything newValue) {
         throw Exception("ValueDeclaration.staticSet does not exist");
     }
+}
+
+class TopLevelClassOrInterfaceDeclaration(ClassOrInterfaceDeclaration declaration)
+        satisfies BoundClassOrInterfaceDeclaration {
+    instantiate(Anything* arguments)
+            => if (is ClassDeclaration declaration)
+                then declaration.instantiate(empty, *arguments)
+                else SyntaxError("Cannot instantiate an interface");
 }
 
 class TopLevelFunctionDeclaration(FunctionDeclaration declaration)

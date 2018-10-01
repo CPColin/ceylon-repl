@@ -1,17 +1,18 @@
 import ceylon.language.meta.declaration {
+    ClassOrInterfaceDeclaration,
     FunctionDeclaration,
-    FunctionOrValueDeclaration,
     Package,
     ValueDeclaration
 }
 
 BoundDeclaration? resolveTopLevel(Package packaje, String name) {
-    value member = packaje.getMember<FunctionOrValueDeclaration>(name);
-    
-    if (is FunctionDeclaration member) {
-        return TopLevelFunctionDeclaration(member);
-    } else if (is ValueDeclaration member) {
+    if (exists member = packaje.getMember<ValueDeclaration>(name)) {
+        // Top-level objects match both ClassOrInterfaceDeclaration and ValueDeclaration.
         return TopLevelValueDeclaration(member);
+    } else if (exists member = packaje.getMember<FunctionDeclaration>(name)) {
+        return TopLevelFunctionDeclaration(member);
+    } else if (exists member = packaje.getMember<ClassOrInterfaceDeclaration>(name)) {
+        return TopLevelClassOrInterfaceDeclaration(member);
     } else {
         return null;
     }
