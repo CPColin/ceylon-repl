@@ -1,9 +1,12 @@
-import ceylon.ast.core {
-    IntegerLiteral
+import com.redhat.ceylon.compiler.typechecker.tree {
+    Tree
+}
+import com.crappycomic.ceylonrepl {
+    SyntaxError
 }
 
 suppressWarnings("deprecation")
-Integer|SyntaxError evaluateIntegerLiteral(Context context, IntegerLiteral literal) {
+Integer|SyntaxError evaluateNaturalLiteral(Tree.NaturalLiteral literal) {
     value stripped = literal.text.replace("_", "");
     String val;
     Integer radix;

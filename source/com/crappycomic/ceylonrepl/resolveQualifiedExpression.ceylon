@@ -10,6 +10,9 @@ import ceylon.language.meta.declaration {
     FunctionOrValueDeclaration,
     ValueDeclaration
 }
+import com.crappycomic.ceylonrepl.evaluate {
+    evaluate
+}
 
 BoundDeclaration|SyntaxError|Null resolveQualifiedExpression(
         Context context, QualifiedExpression expression) {
@@ -18,7 +21,7 @@ BoundDeclaration|SyntaxError|Null resolveQualifiedExpression(
     "TODO"
     assert (!expression.nameAndArgs.typeArguments exists);
     
-    value receiver = evaluate(context, expression.receiverExpression);
+    value receiver = evaluate(context, nothing);
     
     if (!exists receiver) {
         return receiver;

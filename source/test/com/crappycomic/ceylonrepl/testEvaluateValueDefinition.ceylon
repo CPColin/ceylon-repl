@@ -1,6 +1,3 @@
-import ceylon.ast.core {
-    Node
-}
 import ceylon.test {
     assertEquals,
     assertNull,
@@ -9,7 +6,12 @@ import ceylon.test {
 }
 
 import com.crappycomic.ceylonrepl {
-    Context,
+    Context
+}
+import com.redhat.ceylon.compiler.typechecker.tree {
+    Node
+}
+import com.crappycomic.ceylonrepl.evaluate {
     evaluate
 }
 
