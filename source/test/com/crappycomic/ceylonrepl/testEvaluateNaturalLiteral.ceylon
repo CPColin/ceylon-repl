@@ -4,7 +4,7 @@ import ceylon.test {
     test
 }
 
-{[String, Integer]*} testEvaluateIntegerLiteralParameters = {
+{[String, Integer]*} testEvaluateNaturalLiteralParameters = {
     ["0", 0],
     ["5", 5],
     ["5k", 5000],
@@ -16,7 +16,7 @@ import ceylon.test {
 };
 
 test
-parameters(`value testEvaluateIntegerLiteralParameters`)
-shared void testEvaluateIntegerLiteral(String code, Integer expected) {
+parameters(`value testEvaluateNaturalLiteralParameters`)
+shared void testEvaluateNaturalLiteral(String code, Integer expected) {
     assertEquals(testEvaluate(code), expected);
 }

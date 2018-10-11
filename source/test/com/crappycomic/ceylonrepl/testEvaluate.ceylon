@@ -1,17 +1,17 @@
-import ceylon.ast.core {
-    Node
-}
-
 import com.crappycomic.ceylonrepl {
-    Context,
-    evaluate,
+    Context
+}
+import com.crappycomic.ceylonrepl.parse {
     parse
+}
+import com.crappycomic.ceylonrepl.evaluate {
+    evaluate
 }
 
 Anything testEvaluate(String code, Context context = Context()) {
     value node = parse(code);
     
-    assert(is Node node);
+    assert(exists node);
     
     return evaluate(context, node);
 }

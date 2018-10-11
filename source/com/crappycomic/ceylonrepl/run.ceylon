@@ -1,8 +1,11 @@
-import ceylon.ast.core {
-    Node
+import com.crappycomic.ceylonrepl.evaluate {
+    evaluate
 }
-import ceylon.ast.redhat {
-    ...
+import com.crappycomic.ceylonrepl.parse {
+    parse
+}
+import com.redhat.ceylon.compiler.typechecker.tree {
+    Node
 }
 
 "Run the module `com.crappycomic.ceylonrepl`."
@@ -20,14 +23,7 @@ shared void run() {
             break;
         }
         
-        Node? node;
-        
-        try {
-            node = parse(line);
-        } catch (AssertionError e) {
-            print("Parse error: ``e``");
-            continue;
-        }
+        value node = parse(line);
         
         if (!exists node) {
             print("Unable to parse");
@@ -38,6 +34,10 @@ shared void run() {
         
         value result = evaluate(context, node);
         
-        print("\t``result else "<null>"``");
+        if (is Node result) {
+            print("\t<node>");
+        } else {
+            print("\t``result else "<null>"``");
+        }
     }
 }

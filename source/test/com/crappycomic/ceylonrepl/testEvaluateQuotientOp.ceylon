@@ -4,7 +4,7 @@ import ceylon.test {
     test
 }
 
-{[String, Anything]*} testEvaluateQuotientOperationParameters = {
+{[String, Anything]*} testEvaluateQuotientOpParameters = {
     ["1 / 1", 1],
     ["2 / 3", 0],
     ["3 / -1", -3],
@@ -14,7 +14,7 @@ import ceylon.test {
 };
 
 test
-parameters(`value testEvaluateQuotientOperationParameters`)
-shared void testEvaluateQuotientOperation(String code, Anything expected) {
+parameters(`value testEvaluateQuotientOpParameters`)
+shared void testEvaluateQuotientOp(String code, Anything expected) {
     assertEquals(testEvaluate(code), expected);
 }

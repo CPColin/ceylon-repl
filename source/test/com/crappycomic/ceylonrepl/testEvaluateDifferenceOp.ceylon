@@ -4,7 +4,7 @@ import ceylon.test {
     test
 }
 
-{[String, Anything]*} testEvaluateDifferenceOperationParameters = {
+{[String, Anything]*} testEvaluateDifferenceOpParameters = {
     ["1 - 1", 0],
     ["2 - 3", -1],
     ["3 - -1", 4],
@@ -15,7 +15,7 @@ import ceylon.test {
 };
 
 test
-parameters(`value testEvaluateDifferenceOperationParameters`)
-shared void testEvaluateDifferenceOperation(String code, Anything expected) {
+parameters(`value testEvaluateDifferenceOpParameters`)
+shared void testEvaluateDifferenceOp(String code, Anything expected) {
     assertEquals(testEvaluate(code), expected);
 }

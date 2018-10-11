@@ -4,7 +4,7 @@ import ceylon.test {
     test
 }
 
-{[String, Anything]*} testEvaluateProductOperationParameters = {
+{[String, Anything]*} testEvaluateProductOpParameters = {
     ["1 * 1", 1],
     ["2 * 3", 6],
     ["3 * -1", -3],
@@ -14,7 +14,7 @@ import ceylon.test {
 };
 
 test
-parameters(`value testEvaluateProductOperationParameters`)
-shared void testEvaluateProductOperation(String code, Anything expected) {
+parameters(`value testEvaluateProductOpParameters`)
+shared void testEvaluateProductOp(String code, Anything expected) {
     assertEquals(testEvaluate(code), expected);
 }
