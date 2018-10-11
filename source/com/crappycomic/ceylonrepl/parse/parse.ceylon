@@ -15,9 +15,5 @@ import org.antlr.runtime {
 CeylonParser parser(String code)
         => CeylonParser(CommonTokenStream(CeylonLexer(ANTLRStringStream(code + " "))));
 
-// TODO: Ultimately want parser(code).block() only, probably.
-shared Node? parse(String code)
-//=> parser(code).block();
-        => parser(code).expression()
-                else parser(code).statement()
-                else parser(code).block();
+"Parses the given [[code]] into a [[Node]], if possible, and returns it."
+shared Node? parse(String code) => parser(code).block();
