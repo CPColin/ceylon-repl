@@ -2,6 +2,10 @@ import ceylon.collection {
     HashMap
 }
 
+import com.crappycomic.ceylonrepl.evaluate {
+    undefined
+}
+
 "Encapsulates the context in which execution is occurring, including the values and imports in the
  current scope, the current value of `this`, and so on."
 shared class Context(outerContext = null)
@@ -17,7 +21,7 @@ shared class Context(outerContext = null)
     
     defines(String key) => values.defines(key);
     
-    get(String key) => values.get(key);
+    get(String key) => values.get(key) else undefined;
     
     put(String key, Anything item) => values.put(key, item);
 }
