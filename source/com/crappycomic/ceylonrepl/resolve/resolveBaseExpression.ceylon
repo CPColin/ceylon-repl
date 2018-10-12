@@ -10,7 +10,7 @@ import com.redhat.ceylon.compiler.typechecker.tree {
 // TODO: search current context, explicitly imported top-levels, ceylon.language top-levels
 
 shared BoundDeclaration|SyntaxError|Undefined resolveBaseExpression(Context context,
-        Tree.BaseMemberExpression expression) {
+        Tree.BaseMemberOrTypeExpression expression) {
     value name = expression.identifier?.text;
     
     if (!exists name) {
