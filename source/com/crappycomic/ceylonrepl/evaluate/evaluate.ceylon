@@ -11,6 +11,7 @@ import com.crappycomic.ceylonrepl {
 "Using the given [[context]], evaluates the given [[node]] and returns its value, if any."
 shared Anything evaluate(Context context, Node node)
         => switch (node)
+            case (is AttributeDeclaration) evaluateAttributeDeclaration(context, node)
             case (is Block) evaluateBlock(context, node)
             case (is DifferenceOp) evaluateDifferenceOp(context, node)
             case (is Expression) evaluateExpression(context, node)
