@@ -1,6 +1,5 @@
 import ceylon.test {
     assertEquals,
-    assertNull,
     parameters,
     test
 }
@@ -8,25 +7,26 @@ import ceylon.test {
 import com.crappycomic.ceylonrepl {
     Context
 }
+import com.crappycomic.ceylonrepl.evaluate {
+    evaluate,
+    undefined
+}
 import com.redhat.ceylon.compiler.typechecker.tree {
     Node
 }
-import com.crappycomic.ceylonrepl.evaluate {
-    evaluate
-}
 
-{[String, String, Anything]*} testEvaluateValueDefinitionParameters = {
+{[String, String, Anything]*} testEvaluateAttributeDeclarationParameters = {
     ["value a = 1", "a", 1],
     ["value a = 1 + 2", "a", 3],
     ["value a => 1", "a", 1]
 };
 
 test
-parameters(`value testEvaluateValueDefinitionParameters`)
-void testEvaluateValueDefinition(String code, String name, Anything expected) {
+parameters(`value testEvaluateAttributeDeclarationParameters`)
+void testEvaluateAttributeDeclaration(String code, String name, Anything expected) {
     value context = Context();
     
-    assertNull(testEvaluate(code, context));
+    assertEquals(testEvaluate(code, context), undefined);
     
     value val = context[name];
     
@@ -38,7 +38,7 @@ void testEvaluateValueDefinition(String code, String name, Anything expected) {
 }
 
 test
-shared void testEvaluateValueDefinitionUpdateEager() {
+shared void testEvaluateAttributeDeclarationUpdateEager() {
     value context = Context();
     
     testEvaluate("value a = 1", context);
@@ -54,7 +54,7 @@ shared void testEvaluateValueDefinitionUpdateEager() {
 }
 
 test
-shared void testEvaluateValueDefinitionUpdateLazy() {
+shared void testEvaluateAttributeDeclarationUpdateLazy() {
     value context = Context();
     
     testEvaluate("value a = 1", context);
