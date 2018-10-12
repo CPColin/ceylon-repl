@@ -1,3 +1,7 @@
+import ceylon.language.meta.model {
+    IncompatibleTypeException
+}
+
 import com.crappycomic.ceylonrepl {
     Context,
     SyntaxError
@@ -34,5 +38,9 @@ Anything evaluateSumOp(Context context, Tree.SumOp operation) {
         return right;
     }
     
-    return `function Summable.plus`.memberInvoke(left, [], right);
+    try {
+        return `function Summable.plus`.memberInvoke(left, [], right);
+    } catch (IncompatibleTypeException e) {
+        return SyntaxError("Incompatible types: ``e.string``");
+    }
 }

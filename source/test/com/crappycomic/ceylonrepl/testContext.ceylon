@@ -1,13 +1,15 @@
 import ceylon.test {
     assertEquals,
     assertFalse,
-    assertNull,
     assertTrue,
     test
 }
 
 import com.crappycomic.ceylonrepl {
     Context
+}
+import com.crappycomic.ceylonrepl.evaluate {
+    undefined
 }
 
 test
@@ -45,7 +47,8 @@ shared void testGetInner() {
     innerContext[key] = val;
     
     assertEquals(innerContext[key], val, "Inner context should return the value after inner put");
-    assertNull(outerContext[key], "Outer context should not have changed after inner put");
+    assertEquals(outerContext[key], undefined,
+        "Outer context should not have changed after inner put");
 }
 
 test
@@ -57,6 +60,7 @@ shared void testGetOuter() {
     
     outerContext[key] = val;
     
-    assertNull(innerContext[key], "Inner context should not have changed after outer put");
+    assertEquals(innerContext[key], undefined,
+        "Inner context should not have changed after outer put");
     assertEquals(outerContext[key], val, "Outer context should return the value after outer put");
 }

@@ -5,6 +5,9 @@ import com.crappycomic.ceylonrepl {
 import com.redhat.ceylon.compiler.typechecker.tree {
     Tree
 }
+import ceylon.language.meta.model {
+    IncompatibleTypeException
+}
 
 Anything evaluateProductOp(Context context, Tree.ProductOp operation) {
     value leftTerm = operation.leftTerm;
@@ -34,5 +37,9 @@ Anything evaluateProductOp(Context context, Tree.ProductOp operation) {
         return right;
     }
     
-    return `function Numeric.times`.memberInvoke(left, [], right);
+    try {
+        return `function Numeric.times`.memberInvoke(left, [], right);
+    } catch (IncompatibleTypeException e) {
+        return SyntaxError("Incompatible types: ``e.string``");
+    }
 }

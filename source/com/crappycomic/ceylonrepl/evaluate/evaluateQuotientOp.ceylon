@@ -5,6 +5,9 @@ import com.crappycomic.ceylonrepl {
 import com.redhat.ceylon.compiler.typechecker.tree {
     Tree
 }
+import ceylon.language.meta.model {
+    IncompatibleTypeException
+}
 
 Anything evaluateQuotientOp(Context context, Tree.QuotientOp operation) {
     value leftTerm = operation.leftTerm;
@@ -34,5 +37,9 @@ Anything evaluateQuotientOp(Context context, Tree.QuotientOp operation) {
         return right;
     }
     
-    return `function Numeric.divided`.memberInvoke(left, [], right);
+    try {
+        return `function Numeric.divided`.memberInvoke(left, [], right);
+    } catch (IncompatibleTypeException e) {
+        return SyntaxError("Incompatible types: ``e.string``");
+    }
 }

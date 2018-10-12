@@ -18,7 +18,7 @@ Undefined|SyntaxError evaluateAttributeDeclaration(Context context,
         return SyntaxError("Identifier ``identifier`` is already defined in the current context");
     }
     
-    if (is Tree.SpecifierExpression expression = declaration.specifierOrInitializerExpression) {
+    if (is Tree.Expression expression = declaration.specifierOrInitializerExpression?.expression) {
         value result = evaluate(context, expression);
         
         if (is Undefined result) {
