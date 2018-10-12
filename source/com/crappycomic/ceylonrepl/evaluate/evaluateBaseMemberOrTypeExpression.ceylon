@@ -10,7 +10,8 @@ import com.redhat.ceylon.compiler.typechecker.tree {
     Tree
 }
 
-Anything evaluateBaseMemberExpression(Context context, Tree.BaseMemberExpression expression) {
+Anything evaluateBaseMemberOrTypeExpression(Context context,
+        Tree.BaseMemberOrTypeExpression expression) {
     value resolved = resolveBaseExpression(context, expression);
     
     if (is BoundValueDeclaration resolved) {

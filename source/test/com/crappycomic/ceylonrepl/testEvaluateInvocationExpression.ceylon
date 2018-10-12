@@ -1,6 +1,5 @@
 import ceylon.test {
     assertEquals,
-    assertTrue,
     parameters,
     test
 }
@@ -9,20 +8,20 @@ import com.crappycomic.ceylonrepl {
     Context
 }
 
-{[String, Anything]*} testEvaluateInvocationParameters = {
+{[String, Anything]*} testEvaluateInvocationExpressionParameters = {
     ["\"a\".repeat(5)", "aaaaa"],
     [""""hello".replace("hell", "heck")""", "hecko"],
     ["identical(true, true)", true],
     ["identical(false, true)", false],
     ["identical(false, false)", true],
-    ["identity(123)", 123]
+    ["identity(123)", 123],
+    ["Integer(5)", 5]
     //["smallest(3, 4)", 3] TODO: type parameters with upper bounds
-    //["Integer(5)", 5] TODO: Parse error
 };
 
 test
-parameters(`value testEvaluateInvocationParameters`)
-void testEvaluateInvocation(String code, Anything expected) {
+parameters(`value testEvaluateInvocationExpressionParameters`)
+void testEvaluateInvocationExpression(String code, Anything expected) {
     assertEquals(testEvaluate(code), expected);
 }
 
