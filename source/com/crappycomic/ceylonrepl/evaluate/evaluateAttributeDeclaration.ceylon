@@ -21,7 +21,9 @@ Undefined|SyntaxError evaluateAttributeDeclaration(Context context,
     }
     
     if (is Tree.Expression expression = declaration.specifierOrInitializerExpression?.expression) {
-        value result = evaluate(context, expression);
+        value result
+                = (declaration.specifierOrInitializerExpression is Tree.LazySpecifierExpression)
+                then expression else evaluate(context, expression);
         
         if (is Undefined result) {
             SyntaxError("Cannot store ``result`` into current context");
