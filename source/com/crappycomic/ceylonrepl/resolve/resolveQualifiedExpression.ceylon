@@ -1,7 +1,3 @@
-import ceylon.ast.core {
-    MemberOperator,
-    QualifiedExpression
-}
 import ceylon.language.meta {
     classDeclaration
 }
@@ -10,22 +6,24 @@ import ceylon.language.meta.declaration {
     FunctionOrValueDeclaration,
     ValueDeclaration
 }
-import com.crappycomic.ceylonrepl.evaluate {
-    evaluate
-}
+
 import com.crappycomic.ceylonrepl {
     Context,
     SyntaxError
 }
+import com.crappycomic.ceylonrepl.evaluate {
+    evaluate
+}
+import com.redhat.ceylon.compiler.typechecker.tree {
+    Tree
+}
 
 shared BoundDeclaration|SyntaxError|Null resolveQualifiedExpression(
-        Context context, QualifiedExpression expression) {
+        Context context, Tree.QualifiedMemberExpression expression) {
     "TODO: Implement other operators"
-    assert (expression.memberOperator is MemberOperator);
-    "TODO"
-    assert (!expression.nameAndArgs.typeArguments exists);
+    assert (expression.memberOperator is Tree.MemberOp);
     
-    value receiver = evaluate(context, nothing);
+    value receiver = evaluate(context, expression.primary);
     
     if (!exists receiver) {
         return receiver;
@@ -33,7 +31,12 @@ shared BoundDeclaration|SyntaxError|Null resolveQualifiedExpression(
         return receiver;
     }
     
-    value memberName = expression.nameAndArgs.name.name;
+    value memberName = expression.identifier?.text;
+    
+    if (!exists memberName) {
+        return SyntaxError("Unable to resolve qualified expression with empty identifier");
+    }
+    
     value clazz = classDeclaration(receiver);
     value member = clazz.getMemberDeclaration<FunctionOrValueDeclaration>(memberName);
     
