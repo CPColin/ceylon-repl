@@ -12,6 +12,7 @@ import com.crappycomic.ceylonrepl {
 shared Anything evaluate(Context context, Node node)
         => switch (node)
             case (is AttributeDeclaration) evaluateAttributeDeclaration(context, node)
+            case (is BaseMemberExpression) evaluateBaseMemberExpression(context, node)
             case (is Block) evaluateBlock(context, node)
             case (is DifferenceOp) evaluateDifferenceOp(context, node)
             case (is Expression) evaluateExpression(context, node)

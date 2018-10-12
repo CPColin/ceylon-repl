@@ -6,11 +6,10 @@ import ceylon.test {
 }
 
 import com.crappycomic.ceylonrepl {
-    Context
-}
-import com.crappycomic.ceylonrepl.evaluate {
+    Context,
     undefined
 }
+
 
 test
 shared void testDefineInner() {

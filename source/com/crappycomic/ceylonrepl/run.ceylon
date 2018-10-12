@@ -36,6 +36,8 @@ shared void run() {
         
         if (is Node result) {
             print("\t<node>");
+        } else if (is SyntaxError result) {
+            print("\tSyntax Error: ``result``");
         } else {
             print("\t``result else "<null>"``");
         }

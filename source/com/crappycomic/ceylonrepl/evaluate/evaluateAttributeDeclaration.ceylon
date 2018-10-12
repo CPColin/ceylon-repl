@@ -1,6 +1,8 @@
 import com.crappycomic.ceylonrepl {
     Context,
-    SyntaxError
+    SyntaxError,
+    Undefined,
+    undefined
 }
 import com.redhat.ceylon.compiler.typechecker.tree {
     Tree
