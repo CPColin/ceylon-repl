@@ -7,26 +7,30 @@ import ceylon.language.meta.declaration {
 import ceylon.language.meta.model {
     Type
 }
+import com.crappycomic.ceylonrepl {
+    SyntaxError,
+    Context
+}
 
-interface BoundDeclaration
+shared interface BoundDeclaration
         of BoundClassOrInterfaceDeclaration
             | BoundFunctionDeclaration
             | BoundValueDeclaration {}
 
-interface BoundClassOrInterfaceDeclaration
+shared interface BoundClassOrInterfaceDeclaration
         of TopLevelClassOrInterfaceDeclaration
         satisfies BoundDeclaration {
     shared formal Anything instantiate(Anything* arguments);
 }
 
-interface BoundFunctionDeclaration
+shared interface BoundFunctionDeclaration
         of MemberFunctionDeclaration
             | TopLevelFunctionDeclaration
         satisfies BoundDeclaration {
     shared formal Anything invoke(Anything* arguments);
 }
 
-interface BoundValueDeclaration
+shared interface BoundValueDeclaration
         of ContextValueDeclaration
             | MemberValueDeclaration
             | StaticValueDeclaration

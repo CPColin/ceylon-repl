@@ -13,8 +13,12 @@ import ceylon.language.meta.declaration {
 import com.crappycomic.ceylonrepl.evaluate {
     evaluate
 }
+import com.crappycomic.ceylonrepl {
+    Context,
+    SyntaxError
+}
 
-BoundDeclaration|SyntaxError|Null resolveQualifiedExpression(
+shared BoundDeclaration|SyntaxError|Null resolveQualifiedExpression(
         Context context, QualifiedExpression expression) {
     "TODO: Implement other operators"
     assert (expression.memberOperator is MemberOperator);

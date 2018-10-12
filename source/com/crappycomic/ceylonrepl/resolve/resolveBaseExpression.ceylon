@@ -1,13 +1,21 @@
-import ceylon.ast.core {
-    BaseExpression
+import com.crappycomic.ceylonrepl {
+    Context,
+    SyntaxError,
+    Undefined
+}
+import com.redhat.ceylon.compiler.typechecker.tree {
+    Tree
 }
 
 // TODO: search current context, explicitly imported top-levels, ceylon.language top-levels
 
-BoundDeclaration? resolveBaseExpression(Context context, BaseExpression expression) {
-    value name = expression.nameAndArgs.name.name;
+shared BoundDeclaration|SyntaxError|Undefined resolveBaseExpression(Context context,
+        Tree.BaseMemberExpression expression) {
+    value name = expression.identifier?.text;
     
-    "TODO" assert (!expression.nameAndArgs.typeArguments exists);
+    if (!exists name) {
+        return SyntaxError("Unable to resolve empty identifier");
+    }
     
     function recurse(Context context, String name) {
         if (context.defines(name)) {

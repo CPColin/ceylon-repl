@@ -5,7 +5,12 @@ import ceylon.language.meta.declaration {
     ValueDeclaration
 }
 
-BoundDeclaration? resolveTopLevel(Package packaje, String name) {
+import com.crappycomic.ceylonrepl {
+    Undefined,
+    undefined
+}
+
+shared BoundDeclaration|Undefined resolveTopLevel(Package packaje, String name) {
     if (exists member = packaje.getMember<ValueDeclaration>(name)) {
         // Top-level objects match both ClassOrInterfaceDeclaration and ValueDeclaration.
         return TopLevelValueDeclaration(member);
@@ -14,6 +19,6 @@ BoundDeclaration? resolveTopLevel(Package packaje, String name) {
     } else if (exists member = packaje.getMember<ClassOrInterfaceDeclaration>(name)) {
         return TopLevelClassOrInterfaceDeclaration(member);
     } else {
-        return null;
+        return undefined;
     }
 }

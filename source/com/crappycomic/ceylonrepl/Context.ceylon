@@ -2,9 +2,7 @@ import ceylon.collection {
     HashMap
 }
 
-import com.crappycomic.ceylonrepl.evaluate {
-    undefined
-}
+
 
 "Encapsulates the context in which execution is occurring, including the values and imports in the
  current scope, the current value of `this`, and so on."

@@ -1,17 +1,17 @@
 import ceylon.test {
     assertEquals,
-    assertNull,
     parameters,
     test
 }
 
 import com.crappycomic.ceylonrepl {
-    Context
+    Context,
+    undefined
 }
 
-{[{<String->Anything>*}, String, Anything]*} testEvaluateBaseExpressionParameters = {
+{[{<String->Anything>*}, String, Anything]*} testEvaluateBaseMemberExpressionParameters = {
     [{"a"->1}, "a", 1],
-    [{"a"->1}, "b", null],
+    [{"a"->1}, "b", undefined],
     [{"a"->1, "b"->2}, "a + b", 3],
     [empty, "true", true],
     [empty, "false", false],
@@ -19,8 +19,8 @@ import com.crappycomic.ceylonrepl {
 };
 
 test
-parameters(`value testEvaluateBaseExpressionParameters`)
-void testEvaluateBaseExpression({<String->Anything>*} contextEntries, String code,
+parameters(`value testEvaluateBaseMemberExpressionParameters`)
+void testEvaluateBaseMemberExpression({<String->Anything>*} contextEntries, String code,
         Anything expected) {
     value context = Context();
     
@@ -30,7 +30,7 @@ void testEvaluateBaseExpression({<String->Anything>*} contextEntries, String cod
 }
 
 test
-void testEvaluateBaseExpressionOuterInner() {
+void testEvaluateBaseMemberExpressionOuterInner() {
     value outerContext = Context();
     value innerContext = outerContext.inner;
     
@@ -41,7 +41,7 @@ void testEvaluateBaseExpressionOuterInner() {
     
     assertEquals(testEvaluate("a", outerContext), 1);
     assertEquals(testEvaluate("b", outerContext), 2);
-    assertNull(testEvaluate("c", outerContext));
+    assertEquals(testEvaluate("c", outerContext), undefined);
     
     assertEquals(testEvaluate("a", innerContext), 3);
     assertEquals(testEvaluate("b", innerContext), 2);

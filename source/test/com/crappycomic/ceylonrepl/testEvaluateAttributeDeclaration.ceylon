@@ -5,11 +5,11 @@ import ceylon.test {
 }
 
 import com.crappycomic.ceylonrepl {
-    Context
+    Context,
+    undefined
 }
 import com.crappycomic.ceylonrepl.evaluate {
-    evaluate,
-    undefined
+    evaluate
 }
 import com.redhat.ceylon.compiler.typechecker.tree {
     Node
