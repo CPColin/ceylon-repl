@@ -2,10 +2,9 @@ import ceylon.collection {
     HashMap
 }
 
-
-
 "Encapsulates the context in which execution is occurring, including the values and imports in the
  current scope, the current value of `this`, and so on."
+// TODO: move to eval package
 shared class Context(outerContext = null)
         satisfies Correspondence<String,Anything> & KeyedCorrespondenceMutator<String,Anything> {
     "The context of the scope just outside the scope of this instance. Values in this instance hide
@@ -22,4 +21,6 @@ shared class Context(outerContext = null)
     get(String key) => values.get(key) else undefined;
     
     put(String key, Anything item) => values.put(key, item);
+    
+    string => values.string;
 }

@@ -26,7 +26,7 @@ Undefined|SyntaxError evaluateAttributeDeclaration(Context context,
                 then expression else evaluate(context, expression);
         
         if (is Undefined result) {
-            SyntaxError("Cannot store ``result`` into current context");
+            return SyntaxError("Cannot store ``result`` into current context");
         } else if (is SyntaxError result) {
             return result;
         } else {
