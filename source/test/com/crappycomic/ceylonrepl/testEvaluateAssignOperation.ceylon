@@ -7,6 +7,9 @@ import com.crappycomic.ceylonrepl {
     Context
 }
 
+// TODO: type safety, immutability
+// figure out if we should even allow "a = 1" to create "a"
+
 test
 shared void testEvaluateAssignOperationCreatesNewValue() {
     value context = Context();
