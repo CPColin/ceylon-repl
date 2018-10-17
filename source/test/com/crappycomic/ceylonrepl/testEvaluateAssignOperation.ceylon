@@ -16,9 +16,8 @@ shared void testEvaluateAssignOperationCreatesNewValue() {
     value key = "testKey";
     value val = "testValue";
     
-    value result = testEvaluate("``key`` = \"``val``\"", context);
+    testEvaluate("``key`` = \"``val``\"", context);
     
-    assertEquals(result, val, "Expression should have the value of the assignment");
     assertEquals(context[key], val, "Context should have the assigned value");
 }
 
@@ -31,8 +30,7 @@ shared void testEvaluateAssignOperationUpdatesExistingValue() {
     
     context[key] = initialValue;
     
-    value result = testEvaluate("``key`` = \"``finalValue``\"", context);
+    testEvaluate("``key`` = \"``finalValue``\"", context);
     
-    assertEquals(result, finalValue, "Expression should have the value of the assignment");
     assertEquals(context[key], finalValue, "Context should have the new value");
 }
