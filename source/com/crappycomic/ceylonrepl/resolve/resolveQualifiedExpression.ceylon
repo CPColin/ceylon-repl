@@ -9,7 +9,8 @@ import ceylon.language.meta.declaration {
 
 import com.crappycomic.ceylonrepl {
     Context,
-    SyntaxError
+    SyntaxError,
+    undefined
 }
 import com.crappycomic.ceylonrepl.evaluate {
     evaluate
@@ -29,6 +30,8 @@ shared BoundDeclaration|SyntaxError|Null resolveQualifiedExpression(
         return receiver;
     } else if (is SyntaxError receiver) {
         return receiver;
+    } else if (receiver == undefined) {
+        return SyntaxError("Cannot dereference an undefined value");
     }
     
     value memberName = expression.identifier?.text;
