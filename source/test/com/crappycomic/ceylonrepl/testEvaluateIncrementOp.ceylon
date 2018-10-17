@@ -26,3 +26,14 @@ shared void testEvaluateIncrementOp(Anything initialVariableValue,
     assertEquals(testEvaluate("++``key``", context), expectedExpressionValue);
     assertEquals(context[key], expectedVariableValue);
 }
+
+test
+void testEvaluateIncrementOpInner() {
+    value code = "variable value a = 0;
+                  if (true) { ++a; }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 1);
+}
