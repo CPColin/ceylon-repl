@@ -51,12 +51,6 @@ Anything evaluateDecrementOp(Context context, Tree.DecrementOp operation) {
         return SyntaxError("Incompatible types: ``e.string``");
     }
     
-    value identifier = baseExpression.identifier?.text;
-    
-    if (!exists identifier) {
-        return SyntaxError("Cannot decrement empty identifier");
-    }
-    
     resolved.set(result);
     
     return result;
