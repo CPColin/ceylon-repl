@@ -35,4 +35,5 @@ shared Anything evaluate(Context context, Node node)
             case (is SpecifierStatement) evaluateSpecifierStatement(context, node)
             case (is StringLiteral) evaluateStringLiteral(node)
             case (is SumOp) evaluateSumOp(context, node)
+            case (is WhileStatement) evaluateWhileStatement(context, node)
             else node;
