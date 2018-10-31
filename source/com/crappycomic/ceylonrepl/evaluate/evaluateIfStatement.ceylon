@@ -15,17 +15,12 @@ Anything evaluateIfStatement(Context context, Tree.IfStatement statement) {
     assert (exists conditions = conditionList.conditions);
     "TODO"
     assert (conditions.size() == 1);
-    "TODO"
-    assert (is Tree.BooleanCondition condition = conditions[0]);
+    assert (is Tree.Condition condition = conditions[0]);
     
-    value result = evaluate(context, condition.expression);
+    value result = evaluateCondition(context, condition);
     
-    if (result is SyntaxError) {
+    if (is SyntaxError result) {
         return result;
-    }
-    
-    if (!is Boolean result) {
-        return SyntaxError("If condition did not evaluate to a Boolean: ``result else "<null>"``");
     }
     
     if (result) {
