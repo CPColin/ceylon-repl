@@ -212,3 +212,131 @@ void testEvaluateIfNotExistsNull() {
     
     assertEquals(context["a"], 1);
 }
+
+test
+void testEvaluateIfIsExactType() {
+    value code = "variable value a = 1;
+                  
+                  if (is Integer a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 2);
+}
+
+test
+void testEvaluateIfIsSuperType() {
+    value code = "variable value a = 1;
+                  
+                  if (is Object a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 2);
+}
+
+test
+void testEvaluateIfIsGenericType() {
+    value code = "variable value a = 1;
+                  
+                  if (is Integral<Integer> a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 2);
+}
+
+test
+void testEvaluateIfIsWrongType() {
+    value code = "variable value a = 1;
+                  
+                  if (is String a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 3);
+}
+
+test
+void testEvaluateIfNotIsExactType() {
+    value code = "variable value a = 1;
+                  
+                  if (!is Integer a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 3);
+}
+
+test
+void testEvaluateIfNotIsSuperType() {
+    value code = "variable value a = 1;
+                  
+                  if (!is Object a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 3);
+}
+
+test
+void testEvaluateIfNotIsGenericType() {
+    value code = "variable value a = 1;
+                  
+                  if (!is Integral<Integer> a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 3);
+}
+
+test
+void testEvaluateIfNotIsWrongType() {
+    value code = "variable value a = 1;
+                  
+                  if (!is String a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 2);
+}
