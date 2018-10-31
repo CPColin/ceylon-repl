@@ -4,7 +4,8 @@ import ceylon.collection {
 
 "Encapsulates the context in which execution is occurring, including the values and imports in the
  current scope, the current value of `this`, and so on."
-// TODO: move to eval package
+// TODO: move to eval package?
+// TODO: rename to Frame, to match language specification
 shared class Context(outerContext = null)
         satisfies Correspondence<String,Anything> & KeyedCorrespondenceMutator<String,Anything> {
     "The context of the scope just outside the scope of this instance. Values in this instance hide
@@ -18,7 +19,7 @@ shared class Context(outerContext = null)
     
     defines(String key) => values.defines(key);
     
-    get(String key) => values.get(key) else undefined;
+    get(String key) => if (defines(key)) then values.get(key) else undefined;
     
     put(String key, Anything item) => values.put(key, item);
     
