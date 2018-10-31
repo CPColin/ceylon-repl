@@ -12,7 +12,7 @@ import com.crappycomic.ceylonrepl {
 
 
 test
-shared void testDefineInner() {
+void testDefineInner() {
     value outerContext = Context();
     value innerContext = outerContext.inner;
     value key = "key";
@@ -24,7 +24,7 @@ shared void testDefineInner() {
     assertFalse(outerContext.defines(key), "Outer context should not have changed after inner put");
 }
 
-shared void testDefineOuter() {
+void testDefineOuter() {
     value outerContext = Context();
     value innerContext = outerContext.inner;
     value key = "key";
@@ -37,7 +37,7 @@ shared void testDefineOuter() {
 }
 
 test
-shared void testGetInner() {
+void testGetInner() {
     value outerContext = Context();
     value innerContext = outerContext.inner;
     value key = "key";
@@ -51,7 +51,7 @@ shared void testGetInner() {
 }
 
 test
-shared void testGetOuter() {
+void testGetOuter() {
     value outerContext = Context();
     value innerContext = outerContext.inner;
     value key = "key";
@@ -62,4 +62,21 @@ shared void testGetOuter() {
     assertEquals(innerContext[key], undefined,
         "Inner context should not have changed after outer put");
     assertEquals(outerContext[key], val, "Outer context should return the value after outer put");
+}
+
+test
+void testGetUndefined() {
+    value context = Context();
+    
+    assertEquals(context["a"], undefined);
+}
+
+test
+void testGetNull() {
+    value context = Context();
+    value key = "a";
+    
+    context[key] = null;
+    
+    assertEquals(context[key], null);
 }
