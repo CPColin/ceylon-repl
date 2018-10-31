@@ -8,16 +8,15 @@ import com.redhat.ceylon.compiler.typechecker.tree {
     Tree
 }
 
-Anything evaluateSpecifierStatement(Context context, Tree.SpecifierStatement statement) {
+Undefined|SyntaxError evaluateSpecifierStatement(Context context,
+        Tree.SpecifierStatement statement) {
     value identifier = statement.baseMemberExpression?.token?.text;
     
     if (!exists identifier) {
         return SyntaxError("Cannot declare an attribute with no identifier");
     }
     
-    value expression = statement.specifierExpression.expression;
-    value result = (statement.specifierExpression is Tree.LazySpecifierExpression)
-        then expression else evaluate(context, expression);
+    value result = evaluate(context, statement.specifierExpression);
     
     if (is Undefined result) {
         return SyntaxError("Cannot store ``result`` into current context");
