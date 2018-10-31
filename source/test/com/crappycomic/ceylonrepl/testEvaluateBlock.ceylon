@@ -38,3 +38,11 @@ void testEvaluateNestedBlock() {
     assertNull(context["b"]);
     assertEquals(result, undefined);
 }
+
+test
+void testEvaluateEmptyBlock() {
+    value code = "{}";
+    value result = testEvaluate(code, Context());
+    
+    assertEquals(result, undefined);
+}
