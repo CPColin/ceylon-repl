@@ -148,3 +148,67 @@ void testEvaluateIfStatementElseIfBlockContext() {
     
     assertEquals(context["a"], undefined);
 }
+
+test
+void testEvaluateIfExistsNotNull() {
+    value code = "variable value a = 1;
+                  
+                  if (exists a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 2);
+}
+
+test
+void testEvaluateIfExistsNull() {
+    value code = "variable value a = null;
+                  
+                  if (exists a) {
+                      a = 1;
+                  } else {
+                      a = 2
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 2);
+}
+
+test
+void testEvaluateIfNotExistsNotNull() {
+    value code = "variable value a = 1;
+                  
+                  if (!exists a) {
+                      a = 2;
+                  } else {
+                      a = 3;
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 3);
+}
+
+test
+void testEvaluateIfNotExistsNull() {
+    value code = "variable value a = null;
+                  
+                  if (!exists a) {
+                      a = 1;
+                  } else {
+                      a = 2
+                  }";
+    value context = Context();
+    
+    testEvaluate(code, context);
+    
+    assertEquals(context["a"], 1);
+}

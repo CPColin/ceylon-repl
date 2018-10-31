@@ -9,4 +9,5 @@ import com.redhat.ceylon.compiler.typechecker.tree {
 Boolean|SyntaxError evaluateCondition(Context context, Tree.Condition condition)
         => switch (condition)
             case (is Tree.BooleanCondition) evaluateBooleanCondition(context, condition)
+            case (is Tree.ExistsCondition) evaluateExistsCondition(context, condition)
             else SyntaxError("Unsupported Condition type");
